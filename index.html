@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="https://talent.baidu.com/external/baidu/images/favicon-ignore.ico" type="image/x-icon">
+    <title>首页</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body,
+    li,
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    .wraper {
+        width: 100%;
+        min-width: 1366px;
+        overflow-x: hidden;
+    }
+
+    .header {
+        color: #ffffff;
+        overflow: hidden;
+        background-color: #030031;
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .header .menu {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .header .menu .title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-left: 15px;
+    }
+
+    .header .login {
+        width: 20%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 0 20px;
+    }
+
+    .header .login ul {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .header ul {
+        display: flex;
+        height: 100%;
+    }
+
+
+    .header li {
+        list-style: none;
+        border: 1px solid #030031;
+        height: 100%;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 14px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .header li::before {
+        content: ' ';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        border: 1px solid transparent;
+    }
+
+    .header li:hover::before {
+        width: 100%;
+        transition: all ease 0.5s;
+        border: 1px solid #ffffff;
+    }
+
+    .banner {
+        width: 100%;
+        height: 500px;
+        border: 1px solid #030031;
+        background: url(./assets/banner.png) no-repeat;
+        background-size: cover;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    .banner h1 {
+        margin-top: 120px;
+        font-size: 50px;
+        font-weight: 500;
+        letter-spacing: 5px;
+    }
+
+    .tec-advance {
+        width: 100%;
+        height: 700px;
+        padding: 0 10%;
+    }
+
+    .tec-advance .title {
+        text-align: center;
+        font-size: 30px;
+        margin-top: 80px;
+    }
+
+    .tec-advance .cards {
+        width: 100%;
+        height: 400px;
+        margin-top: 100px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .tec-advance .cards div {
+        width: 300px;
+        height: 100%;
+        border: 1px solid #ddd;
+        padding: 35px;
+        text-align: center;
+        transition: all ease 0.5s;
+        overflow: hidden;
+        /* box-shadow: 3px 3px 10px #ddd; */
+        border-radius: 4px;
+    }
+
+    .tec-advance .cards div:hover {
+        box-shadow: 0px 0px 20px #ddd;
+        transition: all ease 0.5s
+    }
+
+    .tec-advance .cards div h3 {
+        margin: 0;
+        height: 60px;
+        overflow: hidden;
+        margin-top: 30px;
+        font-weight: 500;
+        text-align: left;
+    }
+
+    .tec-advance .cards div p {
+        margin-top: 30px;
+        text-align: left;
+        letter-spacing: 2px;
+        font-size: 14px;
+        color: #636262;
+        line-height: 25px;
+    }
+
+    .manage-parts {
+        width: 100%;
+        height: 650px;
+        background-color: #F7F7F7;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0 10%;
+    }
+
+    .pic1 {
+        width: 601px;
+        height: 399px;
+        background: url(./assets/p1.png) no-repeat;
+        background-size: cover;
+    }
+
+    .pic2 {
+        width: 601px;
+        height: 399px;
+        background: url(./assets/p2.png) no-repeat;
+        background-size: cover;
+    }
+
+    .pic3 {
+        width: 601px;
+        height: 399px;
+        background: url(./assets/p3.png) no-repeat;
+        background-size: cover;
+    }
+
+    .info {
+        width: 50%;
+        height: 650px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 5% 15% 5% 10%;
+    }
+
+    .info-li {
+        display: flex;
+        align-items: center;
+    }
+
+    .info-li span {
+        margin-left: 20px;
+        font-size: 20px;
+    }
+
+    .info .sub-title {
+        font-size: 30px;
+        letter-spacing: 4;
+    }
+
+    .manage-dowload {
+        width: 100%;
+        height: 650px;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0 10%;
+    }
+
+    .data-control {
+        width: 100%;
+        height: 650px;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #F7F7F7;
+        padding: 0 10%;
+    }
+
+    .platform {
+        color: #fff;
+        width: 100%;
+        height: 600px;
+        border: 1px solid transparent;
+        background: url(./assets/back.png) no-repeat;
+        background-size: 100% 100%;
+        text-align: center;
+    }
+
+    .platform h2 {
+        margin-top: 200px;
+        font-weight: 500;
+        font-size: 40px;
+        letter-spacing: 5px;
+    }
+
+    .platform p {
+        letter-spacing: 5px;
+    }
+
+    .platform button {
+        margin-top: 50px;
+    }
+
+
+    .footer {
+        width: 100%;
+        padding: 30px 0;
+        text-align: center;
+    }
+
+    .no-bottom-line:hover::before {
+        border: none !important;
+    }
+
+    .btn {
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        color: #ffffff;
+        transition: all ease 0.4s;
+        font-size: 16px;
+    }
+
+    .primary:hover {
+        transition: all ease 0.4s;
+        background-color: rgb(187, 73, 41);
+    }
+
+    .primary:active {
+        background-color: rgb(185, 123, 43);
+        box-shadow: 3px 3px 10px black;
+        transition: all ease 0.4s;
+    }
+
+    .primary {
+        width: 200px;
+        height: 50px;
+        line-height: 40px;
+        background-color: #DF4A20;
+    }
+
+    .text {
+        width: 160px;
+        height: 40px;
+        line-height: 40px;
+        background-color: #F7F7F7;
+        color: #030031;
+        border: 1px solid #ddd;
+    }
+
+    .mt50 {
+        margin-top: 50px;
+    }
+
+    .flex-wraper {
+        display: flex;
+    }
+</style>
+
+<body>
+    <div class="wraper">
+        <div class="header">
+            <div class="menu">
+                <ul>
+                    <li class="no-bottom-line">
+                        <img src="./assets/logo.png" alt="">
+                        <div class="title">鹰眼数据查询平台</div>
+                    </li>
+                    <li>首页</li>
+                    <li>产品介绍</li>
+                    <li>充值中心</li>
+                    <li>SaaS管理中心</li>
+                </ul>
+            </div>
+            <div class="login">
+                <ul>
+                    <li>登录</li>
+                    <li>注册</li>
+                </ul>
+            </div>
+        </div>
+        <div class="banner">
+            <h1>鹰眼.数据查询平台</h1>
+            <p>基于数美强大的数据画像能力,从启动,注册,登录等业务源头识别灰产行为</p>
+            <p>相对于单一事后发现拦截,预判风险降低业务流程风险更高效</p>
+            <button class="btn primary mt50">
+                申请试用
+            </button>
+        </div>
+        <div class="tec-advance">
+            <div class="title">
+                独有技术优势 让识别过滤更精准
+            </div>
+            <div class="flex-wraper cards">
+                <div>
+                    <img src="./assets/一站式.png" alt="">
+                    <h3>从注册-登入-业务行为多个入口 全方位识别欺诈账户</h3>
+                    <p> 一站式保护，注册保护可以将拉新中的欺诈账户过滤掉，登录保护可以将存量中的欺诈账户过滤掉，而到业务行为时可以再做-次识别确认。 </p>
+                </div>
+
+                <div>
+                    <img src="./assets/画像.png" alt="">
+                    <h3>精准刻画账户风险画像</h3>
+                    <p> 基于账户画像，深度关系网络和无监督机器学习模型精准刻画账户风险画像。 </p>
+                </div>
+
+                <div>
+                    <img src="./assets/人工智能.png" alt="">
+                    <h3>人工智能精准识别欺诈风险，客户续签率>98%以上</h3>
+                    <p> 机器注册、登录识别，拦截风险比例高出行业均值40%以上，验证准确率高于99.99%。</p>
+                </div>
+
+                <div>
+                    <img src="./assets/黑产账号.png" alt="">
+                    <h3>增加黑产账号成本10倍以上</h3>
+                    <p> 实时行为分析，基于人工智能技术和在线学习，实时识别欺诈行为。 </p>
+                </div>
+            </div>
+        </div>
+        <div class="manage-parts flex-wraper">
+            <div class="pic1"></div>
+            <div class="info">
+                <div class="sub-title">进件管理</div>
+                <div class="">
+                    获取客户资料最快30秒，告别长时间录件、重复录件、实名认证、通讯录、运营商、学历报告、淘宝报告、芝麻信用分、客户定位、社交信息最全面的报告--键获取
+                </div>
+                <div class="">
+                    <button class="btn text">查看详情</button>
+                </div>
+                <div class="info-li">
+                    <img src="./assets/网页进件.png" alt="">
+                    <span>H5 网页进件</span>
+                </div>
+                <div class="info-li">
+                    <img src="./assets/后台查询.png" alt="">
+                    <span>H5 后台查询</span>
+                </div>
+                <div class="info-li">
+                    <img src="./assets/在现审核.png" alt="">
+                    <span>H5 在线审核</span>
+                </div>
+            </div>
+        </div>
+        <div class="manage-dowload flex-wraper">
+            <div class="info">
+                <div class="sub-title">下载管理</div>
+                <div class="">
+                    借款合同签订完全网贷化,放款模式多样化支持收款,续期,催款在线流程化管理,轻松贷后
+                </div>
+                <div class="">
+                    <button class="btn text">查看详情</button>
+                </div>
+                <div class="info-li">
+                    <img src="./assets/电子合同.png" alt="">
+                    <span>H5 电子合同</span>
+                </div>
+                <div class="info-li">
+                    <img src="./assets/收款管理.png" alt="">
+                    <span>H5 收款管理</span>
+                </div>
+                <div class="info-li">
+                    <img src="./assets/客户管理.png" alt="">
+                    <span>H5 客户管理</span>
+                </div>
+            </div>
+            <div class="pic2"></div>
+        </div>
+        <div class="data-control flex-wraper">
+            <div class="pic3"></div>
+            <div class="info">
+                <div class="sub-title">数据风控</div>
+                <div class="">
+                    验证类数据让借贷欺诈无所遁形
+                </div>
+                <div class="">
+                    <button class="btn text">查看详情</button>
+                </div>
+                <div class="info-li">
+                    <img src="./assets/多维核心.png" alt="">
+                    <span>H5 多维核心</span>
+                </div>
+                <div class="info-li">
+                    <img src="./assets/反欺诈.png" alt="">
+                    <span>H5 反欺诈云</span>
+                </div>
+                <div class="info-li">
+                    <img src="./assets/智能评估.png" alt="">
+                    <span>H5 智能评估</span>
+                </div>
+            </div>
+        </div>
+        <div class="platform">
+            <h2>鹰眼数据查询平台</h2>
+            <p>详细的购买咨询 专业的配置推荐 灵活的价格方案 1对1贴心服务</p>
+            <button class="btn primary">申请试用</button>
+        </div>
+        <div class="footer">
+            Copyright ©2019/7/25 dingyu
+        </div>
+    </div>
+</body>
+
+
+</html>
