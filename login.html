@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <script src="js/vue.min.js"></script>
+    <link rel="stylesheet" href="css/element.css">
+    <script src="js/element.js"></script>
+    <link rel="stylesheet" href="./css/comman.css">
+    <!-- <script src="./js/login.js" async></script> -->
+    <link rel="stylesheet" href="./css/login.css">
+
+</head>
+<style>
+    .el-input-group__prepend {
+        padding: 0
+    }
+</style>
+
+<body>
+
+    <div class="wraper">
+        <div class="login-wrap">
+            <h1>登录</h1>
+            <div class="form-con">
+                <input class="phone-inp" type="text" maxlength="11" placeholder="输入手机号">
+            </div>
+            <div class="form-con">
+                <input class="password-inp" type="password" maxlength="20" placeholder="输入密码">
+            </div>
+            <div class="form-con">
+                <button class="btn" @click="login">登录</button>
+            </div>
+
+            <div class="link">
+                <a href="./repassword.html">找回密码</a>
+            </div>
+            <div class="register">
+                <span class="normal">还没有账号</span>
+                <a href="./register.html">立即注册</a>
+
+            </div>
+
+
+            <div>
+                <el-input placeholder="请输入内容" v-model="input1">
+                    <template slot="prepend">
+                        <img src="./img/logo.png" alt="">
+                    </template>
+                </el-input>
+            </div>
+            <div style="margin-top: 15px;">
+                <el-input placeholder="请输入内容" v-model="input2">
+                    <template slot="append">.com</template>
+                </el-input>
+            </div>
+            <div style="margin-top: 15px;">
+                <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
+                    <el-select v-model="select" slot="prepend" placeholder="请选择">
+                        <el-option label="餐厅名" value="1"></el-option>
+                        <el-option label="订单号" value="2"></el-option>
+                        <el-option label="用户电话" value="3"></el-option>
+                    </el-select>
+                    <el-button slot="append" icon="el-icon-search"></el-button>
+                </el-input>
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+</body>
+<script>
+
+    var vm = new Vue({
+        el: '.wraper',
+        data: {
+            msg: 'hello word',
+            loginForm: {
+                phone: '',
+                password: '',
+            },
+            input1: '',
+            input2: '',
+            input3: '',
+            select: ''
+        },
+        methods: {
+            login() {
+                window.location.href = 'index.html'
+            }
+        }
+    })
+</script>
+
+</html>

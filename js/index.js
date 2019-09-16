@@ -1,101 +1,102 @@
+var vm = new Vue({
+    el: '.wraper',
+    data: {
+        activeIndex: '2',
+        infomation: 'hello word',
+        usename: 'MR DING ER GOU',
+        menuList: [
+            { name: "首页导航", icon: 'el-icon-s-home' },
+            { name: "用户管理", icon: 'el-icon-user-solid' },
+            { name: "智慧评审", icon: 'el-icon-user' },
+            { name: "订单管理", icon: 'el-icon-s-order' },
+            { name: "充值中心", icon: 'el-icon-money' },
+            { name: "系统设置", icon: 'el-icon-setting' },
+            { name: "推广中心", icon: 'el-icon-message-solid' },
+            { name: "财务中心", icon: 'el-icon-s-finance' },
+        ],
+        cardList: [
+            { title: '用户总量', bgC: "#8890FA", total: "0", text1: "次日留存：0%", text2: "次月留存：0%", img: "./img/user.png" },
+            { title: '推广总量', bgC: "#C687FB", total: "0", text1: "注册：0", text2: "充值：0.00", img: "./img/push.png" },
+            { title: '充值总量', bgC: "#FFA296", total: "0", text1: "平均充值金额：00", text2: "充值用户总量：0人", img: "./img/chongzhi.png" },
+            { title: '功能累计使用情况', bgC: "#7FC2FF", total: "0", text1: "报告累计使用：0", text2: "评审累计使用：0", img: "./img/fun.png" },
+            { title: '总盘盈利(元)', bgC: "#FF8D8E", total: "0", text1: "充值获利：0", text2: "推广成本：0", img: "./img/profit.png" },
 
-var dots = document.querySelectorAll('.dottes span');
-var con = document.getElementById('container');
-var prev = document.getElementsByClassName('prev')[0];
-var next = document.getElementsByClassName('next')[0];
-var business = document.getElementsByClassName('business')[0];
-var info = document.getElementsByClassName('new-information')[0];
-
-
-var interval;
-
-var num = 0;         //轮播图起始位置
-var offsetX = 1534; //轮播图偏移
-var pages = 5;      //轮播图页数
-
-function showActiveDot() {  //active点移动;
-    for (var i = 0; i < pages; i++) {
-        if (dots && dots[i]) {
-            dots[i].className = '';
-            dots[num / -offsetX].className = 'active';
+        ],
+        activeName: 'first',
+        tableData: [
+            { id: '注册新增', name: '使用情况', amount1: '推广情况', amount2: '充值情况', amount3: "昨日新增充值率(%)" },
+            { id: '0', name: '0', amount1: '165', amount2: '4.43', amount3: 12 },
+            { id: '0', name: '查看报告', amount1: '评审', amount2: '业务员', amount3: "戴超" },
+            { id: '0', name: '王小虎', amount1: '621', amount2: '2.2', amount3: 17 },
+            { id: '12987126', name: '王小虎', amount1: '539', amount2: '4.1', amount3: 15 },
+            { id: '12987126', name: '王小虎', amount1: '539', amount2: '4.1', amount3: 15 },
+            { id: '12987126', name: '王小虎', amount1: '539', amount2: '4.1', amount3: 15 },
+            { id: '12987126', name: '王小虎', amount1: '539', amount2: '4.1', amount3: 15 },
+            { id: '12987126', name: '王小虎', amount1: '539', amount2: '4.1', amount3: 15 },
+            { id: '12987126', name: '王小虎', amount1: '539', amount2: '4.1', amount3: 15 },
+            { id: '12987126', name: '王小虎', amount1: '539', amount2: '4.1', amount3: 15 },
+        ],
+        str: 'today',
+        form: {
+            name: '',
+            region: '',
+            date1: '',
+            date2: '',
+            delivery: false,
+            type: [],
+            resource: '',
+            desc: ''
         }
-    }
-}
+    },
+    methods: {
+        handleSelect(key, keyPath) {
+            console.log(key, keyPath);
+        },
+        handleOpen(key, keyPath) {
+            console.log(key, keyPath);
+        },
+        handleClose(key, keyPath) {
+            console.log(key, keyPath);
+        },
+        handleClick(tab, event) {
+            console.log(tab, event);
+        },
+        arraySpanMethod({ row, column, rowIndex, columnIndex }) {
+            console.log(row);
 
-function Carousel() { //轮播函数
-    num = num - offsetX;
-    if (num < -offsetX * (pages - 1)) {
-        return num = offsetX;
-    }
-    showActiveDot()
-    con.style.left = num + 'px';
-}
+            if (rowIndex % 2 === 0) {
+                if (columnIndex === 0) {
+                    return [1, 2];
+                } else if (columnIndex === 1) {
+                    return [0, 0];
+                }
+            }
+        },
 
-interval = setInterval(Carousel, 3000);
-
-prev.onclick = function () {
-    oprate(true);
-}
-
-next.onclick = function () {
-    oprate(false);
-}
-
-function oprate(params) {
-    clearInterval(interval);
-    if (params) {
-        num = num + offsetX;
-        if (num > 0) num = -offsetX * (pages - 1);
-    } else {
-        num = num - offsetX;
-        if (num < -offsetX * 4) num = 0;
-    }
-
-    showActiveDot();
-    con.style.left = num + 'px';
-    interval = setInterval(Carousel, 3000);
-}
-
-
-window.onscroll = function () {
-    //检测鼠标滚轮距离顶部位置
-    var top = document.documentElement.scrollTop || document.body.scrollTop;
-
-    /**
-    offsetHeight ==> div自身的高度 高度值包括:元素内容+内边距+边框
-    offsetWidth  ==> div自身宽度  宽度值包括:元素内容+内边距+边框
-    **/
-    if (top > 400) {
-
-        // business.style.left = '0';
-        business.style.width = '100%';
-        business.style.opacity = '1';
-        // setTimeout(() => {
-        //     business.style.opacity = '1';
-        // }, 1000);
-
-
-        //     // box.style.animation = "key .25s linear forwards" //添加动画  
-        //     box.style.left = "500px" //添加动画  
-        //     box.style.opacity = "1" //添加动画  
-        //     // box.style.transform = "scale(1)" //添加动画  
-        // }
-
-
-        // if (top > (pic1.offsetTop - pic1.offsetHeight)) {
-        //     console.log('12222223');
-
-        //     pic1.style.opacity = "1" //添加动画  
-        // }
+        objectSpanMethod({ row, column, rowIndex, columnIndex }) {
+            if (columnIndex === 0) {
+                if (rowIndex % 2 === 0) {
+                    return {
+                        rowspan: 2,
+                        colspan: 1
+                    };
+                } else {
+                    return {
+                        rowspan: 0,
+                        colspan: 0
+                    };
+                }
+            }
+        },
+        change(val) {
+            this.str = val;
+        },
+        logout() {
+            window.location.href = "./login.html"
+        },
+        onSubmit() {
+            console.log('submit!');
+        }
 
     }
-
-    console.log(top, 'top');
-    console.log(info.offsetTop - info.offsetHeight);
-
-    if (top > (info.offsetTop - info.offsetHeight)) {
-        info.style.right = '0';
-        info.style.opacity = '1';
-    }
-}
-
+})

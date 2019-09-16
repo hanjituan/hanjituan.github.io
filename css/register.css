@@ -1,0 +1,139 @@
+.wraper {
+    width: 100%;
+    height: 100%;
+    background-color: #dddddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(../img/bg-dark.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.repassword-wraper {
+    width: 476px;
+    height: 688px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.30);
+}
+
+.repassword-wraper h1 {
+    text-align: center;
+    font-family: PingFangSC-Medium;
+    font-size: 32px;
+    color: #030031;
+    letter-spacing: 0;
+}
+
+.form-con {
+    text-align: center;
+    font-size: 14px;
+}
+
+.phone-inp:focus {
+    outline: 1px solid transparent;
+}
+
+.phone-inp {
+    margin-top: 20px;
+    border: none;
+    border-bottom: 1px solid #dddddd;
+    width: 320px;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 4px;
+    font-size: 14px;
+    color: #666666;
+}
+
+.password-inp {
+    margin-top: 20px;
+}
+
+.btn {
+    border: none;
+    border: 1px solid #007AFF;
+    width: 320px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    background-color: #007AFF;
+    color: #ffffff;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.btn:active {
+    background-color: #2089fb;
+    transition: all ease 0.2s;
+}
+
+a {
+    text-decoration: none;
+    color: #007AFF;
+}
+
+.link {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #007AFF;
+    padding-left: 80px;
+}
+
+.register {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #007AFF;
+    padding-left: 80px;
+}
+
+.normal {
+    color: #666666;
+}
+
+.check {
+    width: 20px !important;
+    height: auto !important;
+}
+
+.flex-box {
+    display: flex;
+    /* justify-content: center; */
+    padding-left: 80px;
+    align-items: center;
+}
+
+.top50 {
+    margin-top: 50px;
+}
+
+.child {
+    position: relative;
+}
+
+.side {
+    position: absolute;
+    right: 78px;
+    bottom: 12px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #007AFF;
+    user-select: none;
+}
+
+.img-side {
+    bottom: 1px;
+}
+
+.side:hover {
+    color: #1971d2;
+}
+
+.to-login {
+    text-align: left;
+    margin-top: 20px;
+    padding-left: 80px;
+    font-size: 14px;
+}

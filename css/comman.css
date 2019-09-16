@@ -1,0 +1,48 @@
+  body,
+  html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      min-width: 1366px;
+      /* min-height: 666px; */
+  }
+
+  * {
+      box-sizing: border-box;
+  }
+
+  input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      line-height: 15px;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      position: relative;
+      /* color: #fff; */
+  }
+
+  input[type="checkbox"]::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #fff;
+      width: 65%;
+      height: 100%;
+      border: 1px solid #d9d9d9
+  }
+
+  input[type="checkbox"]:checked::before {
+      content: "\2713";
+      background-color: #0076FF;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 65%;
+      border: 1px solid #0076FF;
+      color: #fff;
+      font-size: 10px;
+      font-weight: bold;
+  }
