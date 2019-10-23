@@ -36,6 +36,11 @@ export default new Router({
                     name: 'album',
                     component: resolve => (require(["@/pages/album/album.vue"], resolve)),
                 },
+                {
+                    path: '/equipmentAssets',
+                    name: 'equipmentAssets',
+                    component: resolve => (require(["@/pages/assetsManage/equipmentAssets.vue"], resolve)),
+                },
 
             ]
         },

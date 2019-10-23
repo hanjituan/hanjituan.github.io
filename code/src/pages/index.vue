@@ -52,13 +52,13 @@
 
                         </el-menu>
                         <div class="bot">
-                            <el-switch v-model="isCollapse" active-color="#13ce66" inactive-color="#ff4949">
+                            <el-switch v-model="isCollapse" active-color="#ddd" inactive-color="#13ce66">
                             </el-switch>
                         </div>
                     </el-aside>
                     <el-main>
-                        <el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab"
-                            @tab-click="tabClicks">
+                        <el-tabs class="cant-choose" v-model="editableTabsValue" type="border-card" closable
+                            @tab-remove="removeTab" @tab-click="tabClicks">
                             <el-tab-pane v-for="(item, index) in editableTabs" :key="item.name" :label="item.title"
                                 :name="item.name">
                             </el-tab-pane>
@@ -109,7 +109,7 @@
                         key: '2',
                         icon: 'el-icon-money',
                         children: [
-                            { name: '设备资产', key: '2-1' },
+                            { name: '设备资产', key: 'equipmentAssets' },
                             { name: '租户管理', key: '2-2' },
                         ],
                     },
@@ -231,7 +231,38 @@
             },
 
             removeTab(targetName) {
-                let tabs = this.editableTabs;
+                console.log(targetName)
+                console.log(this.editableTabs)
+
+                if (this.editableTabs.length == 1) {
+                    return false;
+                }
+
+                // var arr = [18,45,69,22,7,56];
+                // //比方说要删除上述数组中所有的奇数
+                // arr = arr.filter(function(v){
+                //     return v%2==0;  //只返回偶数
+                // });
+                // console.log(arr);
+                // //输出结果 18,22,56
+
+                this.editableTabs = this.editableTabs.filter(item => {
+                    return item.name != targetName;
+                })
+
+                console.log(this.editableTabs);
+
+
+                this.editableTabs.map((item, index) => {
+                    if (targetName == item.name) {
+                        // delete item;
+                        // this.editableTabs.splice()
+                    }
+                })
+                this.editableTabsValue = this.editableTabs[0].name;
+                this.$router.push(this.editableTabs[0].name);
+
+                // let tabs = this.editableTabs;
                 // let activeName = this.editableTabsValue;
                 // if (activeName === targetName) {
                 //     tabs.forEach((tab, index) => {
@@ -321,6 +352,10 @@
         position: absolute;
         bottom: 20px;
         left: 20px;
+    }
+
+    .cant-choose {
+        user-select: none;
     }
 
     .logo-pic {

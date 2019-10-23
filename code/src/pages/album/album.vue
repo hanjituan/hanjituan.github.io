@@ -1,23 +1,25 @@
 <template>
     <div class="hello">
-
+<!-- 
         <div class="header">
 
-        </div>
+        </div> -->
 
         <div class="content">
             <el-calendar v-model="myDate">
                 <template slot="dateCell" slot-scope="{date, data}">
                     <div class="full" @click="chooseDate" :class="data.isSelected ? 'is-selected' : ''">
-                        <!-- {{ data.day.split('-').slice(1).join('-') }} {{ data.isSelected ? '✔️' : ''}} -->
-                        {{data.day}}
-                        <!-- <div class="badge">
-                            <el-badge :value="1" class="item"></el-badge>
-                        </div> -->
+                        {{ data.day.split('-').slice(1).join('-') }} {{ data.isSelected ? '✔️' : ''}}
                     </div>
                 </template>
             </el-calendar>
         </div>
+
+        <div class="demo-image__preview">
+            <el-image style="width: 100px; height: 100px" :src="url" :preview-src-list="srcList">
+            </el-image>
+        </div>
+
 
         <el-dialog title="" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
             <div class="demo-image__lazy">
@@ -52,6 +54,11 @@
                     'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
                     'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg',
                     'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg'
+                ],
+                url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+                srcList: [
+                    'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+                    'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
                 ]
             }
         },
@@ -60,7 +67,7 @@
                 this.count += 2
             },
             chooseDate() {
-                // this.dialogVisible = true;
+                this.dialogVisible = true;
             },
             handleClose(done) {
                 this.dialogVisible = false;
