@@ -1,0 +1,21 @@
+:host-context .test-cell {}
+
+.drag-item {
+    width: 0;
+    display: inline-block;
+    height: 20px;
+    float: right;
+    cursor: col-resize;
+    padding-right: 2px;
+    background-color: rgb(232, 232, 232);
+}
+
+.drag-item:hover {
+    cursor: col-resize;
+}
+
+.bk-table-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}

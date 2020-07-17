@@ -1,0 +1,77 @@
+<div class="wraper">
+    <div class="login-nav">
+        <div class="login-nav-wraper">
+            <img src="../../../assets/img/login/logo.png" style="width: 174px;height: 48px;">
+            <p>客服热线：025-66780292 </p>
+            <button nz-button class="nav-btn">
+                <img src="../../../assets/img/login/qq.png" style="width: 14px;position: relative;top: -1px;" alt="">
+                在线咨询
+            </button>
+            <button nz-button class="nav-btn">
+                App下载
+            </button>
+            <button nz-button class="nav-btn">
+                关注公众号
+            </button>
+            <button nz-button class="nav-btn" nzType="primary" nz-dropdown [nzDropdownMenu]="menu4">
+                立即体验
+                <i nz-icon nzType="down"></i>
+            </button>
+            <nz-dropdown-menu #menu4="nzDropdownMenu">
+                <ul nz-menu>
+                    <li nz-menu-item (click)="loginByTestAccount(1)">通用行业</li>
+                    <li nz-menu-item (click)="loginByTestAccount(2)">服装鞋帽</li>
+                    <li nz-menu-item (click)="loginByTestAccount(3)">建材行业</li>
+                </ul>
+            </nz-dropdown-menu>
+        </div>
+    </div>
+    <div class="login-wraper">
+        <div class="center-img"> </div>
+        <div class="form-body">
+            <div class="login-box-title">平台管理端</div>
+            <form nz-form [formGroup]="validateForm" class="login-form">
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-form-explain class="error-msg" *ngIf="errMsg">{{errMsg}}</nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-input-group nzPrefixIcon="anticon anticon-user">
+                            <input type="text" nz-input formControlName="loginNameOrMobile" placeholder="请输入账户/手机">
+                        </nz-input-group>
+                        <nz-form-explain
+                            *ngIf="validateForm.get('loginNameOrMobile').dirty && validateForm.get('loginNameOrMobile').errors">
+                            请输入账户/手机!
+                        </nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-input-group nzPrefixIcon="anticon anticon-lock">
+                            <input type="password" nz-input formControlName="password" placeholder="请输入登录密码">
+                        </nz-input-group>
+                        <nz-form-explain
+                            *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">
+                            请输入登录密码!
+                        </nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control>
+                        <div class="bot-btn">
+                            <button nz-button class="login-form-button" [nzType]="'primary'" type="submit"
+                                (click)="loginSubmit()">
+                                登录
+                            </button>
+                        </div>
+                    </nz-form-control>
+                </nz-form-item>
+            </form>
+        </div>
+    </div>
+    <div class="footer">
+        ©2016-2017 货氪网 苏ICP备16050344号-1
+    </div>
+</div>

@@ -1,0 +1,6 @@
+<div class="org-cascader">
+    <!-- 级联模式 -->
+    <nz-cascader style="width: 300px;" nzChangeOnSelect [(ngModel)]="curOrgValue" [nzLoadData]="loadData.bind(this)" [nzSize]="'large'"
+        (ngModelChange)="dataChange($event)" [nzPlaceHolder]="'请选择'" (nzSelectionChange)="optionChange($event)">
+    </nz-cascader>
+</div>

@@ -1,0 +1,62 @@
+<div class="page-container add-version">
+    <div class="content-container">
+        <form nz-form [formGroup]="versionForm" (ngSubmit)="submitForm()">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="packageName">名称</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入名称">
+                    <input nz-input formControlName="packageName" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="packageType">类型</nz-form-label>
+                    <nz-form-control [nzSm]="14" [nzXs]="24">
+                        <nz-select  nzPlaceHolder="请选择" formControlName="packageType">
+                            <nz-option *ngFor="let option of apkTypeList" [nzValue]="option.value"
+                                [nzLabel]="option.label"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="version">版本号</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入版本号">
+                    <input nz-input formControlName="version" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="isForceUpdate">是否强制更新</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择是否强制更新">
+                    <nz-select nzPlaceHolder="请选择" formControlName="isForceUpdate">
+                        <nz-option [nzValue]="0" nzLabel="否"></nz-option>
+                        <nz-option [nzValue]="1" nzLabel="是"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="remark">版本说明</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <textarea rows="4" nz-input formControlName="remark"></textarea>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>
+                    版本包
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <nz-upload nzAction="fileUpLoadUrl" [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 1"
+                        [nzCustomRequest]="upload" [nzBeforeUpload]="beforeUpload" (nzChange)="uploadChange($event)">
+                        <button type="button" nz-button>
+                            <i class="anticon anticon-plus"></i>
+                            上传
+                        </button>
+                    </nz-upload>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-control nzOffset="6">
+                    <button nz-button nzType="primary">保存</button>
+                    <button nz-button type="button" (click)="goBack()">返回</button>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </div>
+</div>

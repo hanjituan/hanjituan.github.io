@@ -1,0 +1,26 @@
+<div>
+    <div class="clear-fix m-b-md">
+        <ng-container *ngTemplateOutlet="params.searchTemp;context:searchCtx"></ng-container>
+    </div>
+    <nz-table #rowSelectionTable [nzData]="dataList" [nzBordered]="true" [nzFrontPagination]="false"
+        [nzShowPagination]="true" [nzTotal]="params.tableConfig.total" (nzPageIndexChange)="onIndexChange($event)"
+        nzSize="middle" [nzWidthConfig]="['40','200px','200px','100px','100px','200px','200px','200px','200px']"
+        [nzScroll]="{ x:'130%',y: '240px' }">
+        <thead>
+            <tr>
+                <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate"
+                    (nzCheckedChange)="checkAll($event)"></th>
+                <th *ngFor="let item of params.tableConfig.headers">{{item.title}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of rowSelectionTable.data">
+                <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus($event,data)"></td>
+                <td *ngFor="let item of params.tableConfig.headers">
+                    <ng-container *ngIf="item.pipe">{{data[item.field] | map:item.pipe}}</ng-container>
+                    <ng-container *ngIf="!item.pipe">{{data[item.field]}}</ng-container>
+            </tr>
+        </tbody>
+    </nz-table>
+
+</div>

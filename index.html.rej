@@ -1,0 +1,10 @@
+diff a/index.html b/index.html	(rejected hunks)
+@@ -330,7 +330,7 @@
+                 <ul>
+                     <li class="no-bottom-line">
+                         <img src="./assets/logo.png" alt="">
+-                        <div class="title">鹰眼数据查询平台</div>
++                        <div class="title">房小华</div>
+                     </li>
+                     <li>首页</li>
+                     <li>产品介绍</li>

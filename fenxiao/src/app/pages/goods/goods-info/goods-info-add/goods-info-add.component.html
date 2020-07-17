@@ -1,0 +1,179 @@
+<div class="goods-add-wraper">
+    <div class="base-title">
+        基本信息
+    </div>
+    <div class="form-container">
+        <form nz-form [formGroup]="validateForm">
+            <nz-form-item>
+                <nz-form-label [nzSm]="4" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入名称!">
+                    <input nz-input formControlName="name" placeholder="请输入名称" (blur)="inputValue()" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="specification">规格</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="specification" placeholder="请输入规格" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="categoryCode">分类</nz-form-label>
+                <nz-form-control [nzSm]="12" [nzXs]="24">
+                    <nz-cascader nzChangeOnSelect [nzOptions]="categoryList" formControlName="categoryCode">
+                    </nz-cascader>
+                </nz-form-control>
+                <button nz-button class="mt2" nzType="primary" (click)="addCategory()">
+                    添加分类
+                </button>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="brandId">品牌</nz-form-label>
+                <nz-form-control [nzSm]="12" [nzXs]="24">
+                    <nz-select class="fix-width" nzShowSearch nzAllowClear nzPlaceHolder="请选择品牌" (nzFocus)="getGoodBrand()"
+                        formControlName="brandId" nzShowSearch>
+                        <nz-option *ngFor="let item of brandList" [nzLabel]="item.name" [nzValue]="item.id">
+                        </nz-option>
+                    </nz-select>
+                </nz-form-control>
+                <button nz-button class="mt2" nzType="primary" (click)="showModal('brandId')">
+                    添加品牌
+                </button>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="chineseFirstLetter">名称首字母</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="chineseFirstLetter" placeholder="请输入名称首字母" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="userCode">自定义编码</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="userCode" placeholder="请输入自定义编码" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="shelfLife">保质期（天）</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="shelfLife" placeholder="请输入保质期" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="warningShelfLife">过期预警（天）</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="warningShelfLife" placeholder="请输入过期预警" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item *ngIf="!id">
+                <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="initInvtQty">初始库存</nz-form-label>
+                <nz-form-control>
+                    <input nz-input formControlName="initInvtQty" placeholder="请填写按基础单位计算的库存数量" />
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+        <div class="img-container">
+            <app-image-croppie (urlChange)="urlChange($event)" [urlByDetail]="imgUrlFromCheckDetail"></app-image-croppie>
+        </div>
+    </div>
+    <div class="base-title">
+        <span>单价与价格设置</span>
+        <span class="switch-box">
+            多单位:
+            <nz-switch [(ngModel)]="switchValue" (ngModelChange)="switchUnit()" nzCheckedChildren="是" nzUnCheckedChildren="否"></nz-switch>
+        </span>
+    </div>
+    <div class="table-container">
+        <nz-table #basicTable [nzData]="listOfData" nzBordered [nzShowPagination]="false">
+            <thead>
+                <tr>
+                    <th nzWidth="100px">单位类型</th>
+                    <th nzWidth="250px">单位名称</th>
+                    <th nzWidth="200px">换算关系</th>
+                    <th nzWidth="250px">条码</th>
+                    <th nzWidth="50px"><span class="font-red-color">*</span>销售价（￥）</th>
+                    <th nzWidth="50px">进货价（￥）</th>
+                    <th nzWidth="50px">会员价（￥）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of basicTable.data;let i = index">
+                    <td><span class="font-red-color" *ngIf="data.uomLevel === 0">*</span>{{ unitLevel[data.uomLevel] }}</td>
+                    <td>
+                        <nz-select class="select-width" nzShowSearch nzAllowClear nzPlaceHolder="选择单位"
+                            (nzFocus)="judgNameAndGetAllUnitslist()" [(ngModel)]="data.uomId" (ngModelChange)="changeUnit(i)">
+                            <nz-option *ngFor="let item of unitList" [nzLabel]="item.name" [nzValue]="item.id">
+                            </nz-option>
+                        </nz-select>
+                        <button nz-button class="add-unit" nzType="primary" (click)="showModal('unit')">
+                            添加单位
+                        </button>
+                    </td>
+                    <td>
+                        <span *ngIf="i !== 0">
+                            <nz-input-group [nzAddOnBefore]="prefixTemplateUser" [nzAddOnAfter]="suffixTemplateInfo">
+                                <input type="text" nz-input [(ngModel)]="data.uomRate" (blur)="calc(i)" />
+                            </nz-input-group>
+                            <ng-template #prefixTemplateUser>
+                                1
+                                <span *ngIf="i === 1">{{midUnit}}</span>
+                                <span *ngIf="i === 2">{{bigUnit}}</span>
+                                <span *ngIf="i === 3">{{maxUnit}}</span>
+                                =
+                            </ng-template>
+                            <ng-template #suffixTemplateInfo>
+                                {{basicUnit}}
+                            </ng-template>
+                        </span>
+                    </td>
+                    <td>
+                        <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
+                            <input type="text" nz-input [(ngModel)]="data.barcode" />
+                        </nz-input-group>
+                        <ng-template #suffixButton>
+                            <button nz-button nzType="primary" nzSearch (click)="generateBarcode(i)">生成条码</button>
+                        </ng-template>
+                    </td>
+                    <td>
+                        <nz-input-number [nzStep]="1" [nzMin]="0" [(ngModel)]="data.salePrice" (nzBlur)="calc(i)">
+                        </nz-input-number>
+                    </td>
+                    <td>
+                        <nz-input-number [nzStep]="1" [nzMin]="0" [(ngModel)]="data.buyPrice" (nzBlur)="calc(i)">
+                        </nz-input-number>
+                    </td>
+                    <td>
+                        <nz-input-number [nzStep]="1" [nzMin]="0" [(ngModel)]="data.memberPrice" (nzBlur)="calc(i)">
+                        </nz-input-number>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+    <div class="footer-btn">
+        <button nz-button nzType="default" (click)="returnToList()" style="margin-left:-20px">取消</button>
+        <button nz-button nzType="primary" (click)="saveGood()" [nzLoading]="submitFormLoading" style="margin-left:20px">确认</button>
+    </div>
+    <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" (nzOnCancel)="handleCancel()" [nzFooter]="null" (nzOnOk)="handleOk()">
+        <app-unit-brand-table *ngIf="isVisible" [productObj]="productObj" [modalTitle]="modalTitle">
+        </app-unit-brand-table>
+    </nz-modal>
+
+    <nz-modal [(nzVisible)]="categoryVisiable" nzTitle="添加分类" (nzOnCancel)="handleCancel()" [nzFooter]="null" (nzOnOk)="handleOk()"
+        nzWidth="1000">
+        <app-goods-category></app-goods-category>
+    </nz-modal>
+
+    <nz-modal [nzVisible]="previewVisible" [nzWidth]="500" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible=false">
+        <ng-template #modalContent>
+            <img [src]="previewImage" [ngStyle]="{ 'width': '100%' }" />
+        </ng-template>
+    </nz-modal>
+</div>

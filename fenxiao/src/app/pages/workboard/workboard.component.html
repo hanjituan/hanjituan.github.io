@@ -1,0 +1,195 @@
+<div class="main-container">
+    <div class="long-box top-box"></div>
+    <div class="short-box top-box mf20"></div>
+
+    <div class="long-box mt20 mid-box"></div>
+    <div class="short-box mf20 mt20 mid-box"></div>
+
+    <div class="long-box large-box mt20 bot-box"></div>
+    <div class="short-box large-box mf20 mt20 bot-box"></div>
+    <!-- <div class="main-wraper">
+        <div class="sys-info bgf">
+            <i class="iconfont fxgonggaotubiao"></i>
+            <span class="information">系统公告：7月11日系统停服升级，预计升级时间1小时</span>
+            <span class="main-text">了解更多></span>
+        </div>
+
+        <div class="business-overview bgf mt20">
+            <div class="top-operate-bar">
+                <div class="top-operate-title">
+                    <i class="iconfont fx-jingyingzonglantubiao"></i>
+                    <span class="mlf10">经营总览</span>
+                </div>
+
+                <div class="container">
+                    <div class="tab-switch">
+                        <span (click)="changedType(0,'tabSwitch')" [ngClass]="{'choosed':tabSwitch === 0}"
+                            (click)="chooseDateType('day')">今日</span>
+                        <span (click)="changedType(1,'tabSwitch')" [ngClass]="{'choosed':tabSwitch === 1}">本周</span>
+                        <span (click)="changedType(2,'tabSwitch')" [ngClass]="{'choosed':tabSwitch === 2}">本月</span>
+                        <div [ngStyle]="{'left':tabSwitch * 75 + 'px'}" class="scroll-tab"></div>
+                    </div>
+
+                    <div class="date-picker">
+                        <nz-date-picker [nzDisabledDate]="disabledStartDate" nzShowTime nzFormat="yyyy-MM-dd"
+                            [(ngModel)]="startValue" nzPlaceHolder="开始时间" (ngModelChange)="onStartChange($event)"
+                            (nzOnOpenChange)="handleStartOpenChange($event)">
+                        </nz-date-picker>
+                        至
+                        <nz-date-picker [nzDisabledDate]="disabledEndDate" nzShowTime nzFormat="yyyy-MM-dd"
+                            [(ngModel)]="endValue" nzPlaceHolder="结束时间" [nzOpen]="endOpen"
+                            (ngModelChange)="onEndChange($event)" (nzOnOpenChange)="handleEndOpenChange($event)">
+                        </nz-date-picker>
+                    </div>
+                </div>
+            </div>
+            <div class="overview-box big">
+                <div echarts [options]="chartOptionDept" class="depart-chart" style="width: 100%; height: 100%;">
+                </div>
+            </div>
+            <div class="overview-box big">
+                <div class="title">
+                    <span>实际营收</span>
+                    <small>（元）</small>
+                </div>
+                <div class="number">{{busDate.totalRealIncome}}</div>
+                <div class="foot">
+                    <div class="left">
+                        <span>收款</span>
+                        <span class="have-bg">{{busDate.totalReceivables}}</span>
+                    </div>
+                    <div class="right">
+                        <span>退款</span>
+                        <span class="have-bg">{{busDate.totalRefund}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="overview-box sml">
+                <div class="title">
+                    <span>销售单</span>
+                    <small>（笔）</small>
+                </div>
+                <div class="number">{{busDate.saleOutConut}}</div>
+                <div class="foot">
+                    <div class="left">
+                        <span>散客单</span>
+                        <span class="have-bg">{{busDate.saleOutNotVipConut}}</span>
+                    </div>
+                    <div class="right">
+                        <span>会员单</span>
+                        <span class="have-bg">{{busDate.saleOutVipConut}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="overview-box sml">
+                <div class="title">
+                    <span>退货单</span>
+                    <small>（笔）</small>
+                </div>
+                <div class="number">{{busDate.saleReturnedConut}}</div>
+                <div class="foot">
+                    <div class="left">
+                        <span>散客退单</span>
+                        <span class="have-bg">{{busDate.saleReturnedNotVipConut}}</span>
+                    </div>
+                    <div class="right">
+                        <span>会员退单</span>
+                        <span class="have-bg">{{busDate.saleReturnedVipConut}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-ranking bgf mt20">
+            <div class="top-operate-bar">
+                <div class="top-operate-title">
+                    <i class="iconfont fx-shangpinpaimingtubiao"></i>
+                    <span class="mlf10">商品排行</span>
+                </div>
+                <div class="tab-switch">
+                    <span (click)="changedType(1,'rankingSwitch')" [ngClass]="{'choosed':rankingSwitch === 1}">销量</span>
+                    <span (click)="changedType(2,'rankingSwitch')" [ngClass]="{'choosed':rankingSwitch === 2}">金额</span>
+                    <div [ngStyle]="{'left':(rankingSwitch - 1) * 75 + 'px'}" class="scroll-tab"></div>
+                </div>
+            </div>
+            <div *ngFor="let item of topList; index as i" class="top5" [ngClass]="{'mt30': i === 0}">
+                <div class="index">{{i + 1}}</div>
+                <div class="chart-info">
+                    <div class="chart-title">{{item.productName}}{{item.specification}}</div>
+                    <div class="chart-title-num text-elip"><span class="main-text">数量：</span> {{item.totalSaleQty}}
+                        {{item.uomName}}</div>
+                    <div class="chart-title-value text-elip"><span
+                            class="main-text">销售额：</span>{{item.totalSaleAmount}}元 </div>
+                    <div class="chart-title-profit text-elip"><span
+                            class="main-text">利润率：</span>{{item.totalSaleProfitRate}}%</div>
+                </div>
+                <div class="progress-box">
+                    <div class="progress" [ngStyle]="{'width':item.rate + '%'}">
+                    </div>
+                </div>
+            </div>
+            <div class="product-ranking-foot">
+                <span class="main-text">了解更多></span>
+            </div>
+
+        </div>
+
+        <div class="business-analysis bgf mt20">
+            <div class="top-operate-bar">
+                <div class="top-operate-title">
+                    <i class="iconfont fx-jingyingfenxitubiao"></i>
+                    <span class="mlf10">经营分析</span>
+                </div>
+                <div class="tab-switch">
+                    <span (click)="changedType(1,'lineSwitch')" [ngClass]="{'choosed':lineSwitch === 1}">近一月</span>
+                    <span (click)="changedType(2,'lineSwitch')" [ngClass]="{'choosed':lineSwitch === 2}">近一年</span>
+                    <div [ngStyle]="{'left':(lineSwitch - 1) * 75 + 'px'}" class="scroll-tab"></div>
+                </div>
+            </div>
+            <div echarts [options]="chartOptionAnalysis" class="analysis-chart">
+            </div>
+
+            <div class="swatch-chart-type">
+                <span style="margin-right: 13px;color: #D0A882;">图形切换</span>
+                <span [ngClass]="{'choosed':chartType}" (click)="swatchChartType(1)">
+                    <i class="iconfont fxzhuzhuangtu borderd left-icon" [ngClass]="{'active':chartType}"></i>
+                </span>
+                <span [ngClass]="{'choosed':!chartType}" (click)="swatchChartType(0)">
+                    <i class="iconfont fxzhexiantu2 borderd right-icon" [ngClass]="{'active':!chartType}"></i>
+                </span>
+            </div>
+        </div>
+
+    </div>
+    <div class="main-side">
+        <img class="shop-img" src="../../../assets/img/main/shop.png" alt="">
+        <div class="shop-name">百氪汇超市</div>
+        <div class="shop-info">
+            <span>系统版本：标准版</span>
+            <span class="btn small">升级</span>
+        </div>
+        <div class="shop-info mb50">
+            <span>有效期：2019.09.01-2020.09.01</span>
+            <span class="btn small">续费</span>
+        </div>
+
+        <div class="btn big mt27">帮助指导</div>
+        <div class="btn big">在线咨询</div>
+        <div class="btn big">投诉建议</div>
+
+        <div class="qrcode">
+            <div>
+                <img class="qrcode-img"
+                    src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573464394179&di=dd6f76de357118086832d50240154993&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fc8807656f986d5352a7f9e6c436a50ea44e3b19c2396-QzGPTm_fw658"
+                    alt="">
+                <p>扫一扫关注公众号</p>
+            </div>
+            <div class="mf28">
+                <img class="qrcode-img"
+                    src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573464394179&di=dd6f76de357118086832d50240154993&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fc8807656f986d5352a7f9e6c436a50ea44e3b19c2396-QzGPTm_fw658"
+                    alt="">
+                <p class="">扫码下载手机端</p>
+            </div>
+        </div>
+    </div> -->
+</div>

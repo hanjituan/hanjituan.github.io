@@ -1,0 +1,151 @@
+.dept-wraper {
+    background-color: #ffffff;
+    // min-height: 800px;
+    height: 100%;
+    user-select: none;
+    padding: 0 13px;
+    padding-bottom: 50px;
+
+    .category-wrap {
+        background-color: #ffffff;
+        border-top: 1px solid #dddddd;
+        border-left: 1px solid #dddddd;
+    }
+
+    .button-box {
+        background-color: #ffffff;
+    }
+
+    .btn-add {
+        margin: 20px;
+        margin-left: 0;
+    }
+
+    .add-item {
+        margin-left: 20px;
+    }
+
+    .shadow {
+        transition: all ease 0.2s;
+        box-shadow: 0px 3px 5px #dddddd !important;
+    }
+
+    .light-shadow {
+        transition: all ease 0.2s;
+        box-shadow: 0px 1px 5px #dddddd !important;
+    }
+
+    .fi-list {
+        display: flex;
+        justify-content: space-between;
+        box-shadow: 0px 0px 0px #dddddd;
+        transition: all ease 0.2s;
+        animation: slideBot 0.3s;
+
+        span {
+            width: 50%;
+            border-bottom: 1px solid #dddddd;
+            border-right: 1px solid #dddddd;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        // .fi-name {
+        //     font-weight: bold;
+        //     color: rgba(51, 51, 51, 1);
+        //     font-size: 14px;
+        //     font-family: MicrosoftYaHei-Bold;
+        //     -webkit-font-smoothing: antialiased;
+        // }
+    }
+
+    .fi-name {
+        font-weight: bold;
+        color: rgba(51, 51, 51, 1);
+        font-size: 14px;
+        font-family: MicrosoftYaHei-Bold;
+        -webkit-font-smoothing: antialiased;
+        padding: 0px 20px;
+        cursor: pointer;
+        transition: all ease 0.5s;
+
+        &:hover {
+            color: #337beb;
+            transition: all ease 0.5s;
+            text-shadow: 1px 1px 1px #dddddd;
+        }
+    }
+
+    .sc-list {
+        padding: 0 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        animation: slideBot 0.3s;
+        transition: all ease 0.2s;
+        background-color: #eeeeee;
+
+        span {
+            width: 50%;
+            border-bottom: 1px solid #dddddd;
+            border-right: 1px solid #dddddd;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .sc-opr {
+            border-right: none !important;
+        }
+    }
+
+
+    .th-list {
+        padding: 0 40px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        animation: slideBot 0.5s;
+        transition: all ease 0.2s;
+        background-color: #FAFAFA;
+
+        span {
+            width: 50%;
+            border-bottom: 1px solid #dddddd;
+            border-right: 1px solid #dddddd;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .th-opr {
+            border-right: none !important;
+        }
+    }
+
+
+    .folder-icon {
+        padding: 0 10px;
+        cursor: pointer;
+        transition: all ease 1s;
+        font-size: 18px;
+
+        &:hover {
+            color: #337beb;
+            transform: scale(1.1);
+            transition: all ease 0.5s;
+        }
+    }
+}
+
+
+@keyframes slideBot {
+    from {
+        transform: translateY(-10px);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}

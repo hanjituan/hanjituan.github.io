@@ -1,0 +1,102 @@
+<div class="goods-wraper">
+    <div class="operate-bar" [ngClass]="{'extend-conditions': extendConditions}">
+        <div class="operate-item">
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="请选择状态" [(ngModel)]="filters.locked">
+                <nz-option nzLabel="全部" nzValue=""></nz-option>
+                <nz-option nzLabel="已完成" nzValue="0"></nz-option>
+                <nz-option nzLabel="已保存" nzValue="1"></nz-option>
+            </nz-select>
+        </div>
+        <div class="operate-item">
+            <nz-range-picker [nzFormat]="dateFormat"></nz-range-picker>
+        </div>
+        <div class="operate-item btn-groups">
+            <button nz-button (click)="searchByCondition()" nzType="primary"><i nz-icon nzType="search"></i>搜索</button>
+            <button nz-button (click)="resetCondition()">
+                <i nz-icon nzType="loading-3-quarters" nzTheme="outline"></i>
+                重置
+            </button>
+        </div>
+    </div>
+    <div class="container">
+        <!-- nav -->
+        <app-ufast-table-nav [tableConfig]="tableConfig" [leftTemplate]="leftNav">
+        </app-ufast-table-nav>
+        <ng-template #leftNav>
+            <button nz-button nzType="primary" (click)="openDialog('add')"><i nz-icon nzType="plus"></i>新增</button>
+        </ng-template>
+        <!-- table -->
+        <app-ufast-table [tableConfig]="tableConfig" (selectedChange)="checkTableItem($event)" [dataList]="dataList"
+            (updateList)="getDataList($event)">
+        </app-ufast-table>
+        <ng-template #seqNoTpl let-index="_index">
+            {{index + 1}}
+        </ng-template>
+        <ng-template #operationTpl let-item="_item">
+            <button nz-button nzType="link" (click)="openDialog('edit',item)">
+                <i nz-icon nzType="edit" nzTheme="outline"></i>
+                提交
+            </button>
+            <button nz-button nzType="link" (click)="openDialog('edit',item)">
+                <i nz-icon nzType="edit" nzTheme="outline"></i>
+                编辑
+            </button>
+            <button nz-button nzType="link" (click)="openDialog('edit',item)">
+                <i nz-icon nzType="edit" nzTheme="outline"></i>
+                删除
+            </button>
+        </ng-template>
+    </div>
+
+    <nz-modal [(nzVisible)]="isVisible" nzWidth="1000" [nzTitle]="modalTitle" (nzOnCancel)="handleCancel()"
+        (nzOnOk)="handleOk()" [nzFooter]="modalFooter">
+        <nz-table #basicTable nzBordered [nzShowPagination]="false" [nzData]="listOfData">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>操作</th>
+                    <th>商品条码</th>
+                    <th>商品名称</th>
+                    <th>规格</th>
+                    <th>分类</th>
+                    <th>单位</th>
+                    <th>销售价（￥）</th>
+                    <th>进货价（￥）</th>
+                    <th>会员价（￥）</th>
+                    <th>新销售价（￥）</th>
+                    <th>新进货价（￥）</th>
+                    <th>新会员价（￥）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of basicTable.data">
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.age }}</td>
+                    <td>{{ data.address }}</td>
+                    <td>{{ data.address }}</td>
+                    <td>{{ data.address }}</td>
+                    <td>{{ data.address }}</td>
+                    <td>{{ data.address }}</td>
+                    <td>{{ data.address }}</td>
+                    <td>{{ data.address }}</td>
+                    <td>{{ data.address }}</td>
+                    <td>{{ data.address }}</td>
+                    <td>{{ data.address }}</td>
+                    <td>
+                        <a>Action 一 {{ data.name }}</a>
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <a>Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+
+        <ng-template #modalFooter>
+            <button nz-button nzType="default" (click)="handleCancel()">取消</button>
+            <button nz-button nzType="default" (click)="handleOk()">保存</button>
+            <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isConfirmLoading">
+                提交
+            </button>
+        </ng-template>
+    </nz-modal>
+</div>

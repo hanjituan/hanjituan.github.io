@@ -1,0 +1,22 @@
+<div class="three-link-wraper" [ngClass]="{'no-border':!kind}">
+    <ng-container *ngIf="!kind">
+        <!-- 级联模式 -->
+        <nz-cascader style="width: 380px;" [(ngModel)]="selectedList" [nzLoadData]="loadData.bind(this)" [nzSize]="'large'"
+            (ngModelChange)="onChanges($event)" nzPlaceHolder="省/市/县" [nzPlaceHolder]="'请选择'">
+        </nz-cascader>
+    </ng-container>
+
+    <ng-container *ngIf="kind">
+        <!-- 三个单选框模式 -->
+        <!-- <i class="iconfont fxaddress"></i> -->
+        <nz-select nzAllowClear nzPlaceHolder="请选择省份" [(ngModel)]="selectedProvince" (ngModelChange)="provinceChange($event)">
+            <nz-option *ngFor="let p of provinces" [nzValue]="p.value" [nzLabel]="p.label"></nz-option>
+        </nz-select>
+        <nz-select nzAllowClear nzPlaceHolder="请选择城市" [(ngModel)]="selectedCity" (ngModelChange)="cityChange($event)">
+            <nz-option *ngFor="let c of citys" [nzValue]="c.value" [nzLabel]="c.label"></nz-option>
+        </nz-select>
+        <nz-select nzAllowClear nzPlaceHolder="请选择县区" [(ngModel)]="selectedCountry" (ngModelChange)="areasChange($event)">
+            <nz-option *ngFor="let d of areas" [nzValue]="d.value" [nzLabel]="d.label"></nz-option>
+        </nz-select>
+    </ng-container>
+</div>

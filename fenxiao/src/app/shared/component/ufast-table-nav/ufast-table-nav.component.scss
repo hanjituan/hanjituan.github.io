@@ -1,0 +1,45 @@
+$table-nav-bar-height: 30px;
+
+.table-nav-wrap {
+    position: relative;
+    margin: 12px 0;
+
+    .left {
+        float: left;
+    }
+
+    .right {
+        float: right;
+        display: inline-grid;
+
+        .search-group {
+            width: 300px;
+            vertical-align: bottom;
+        }
+
+        .refresh {
+            font-size: 20px;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ccc;
+            text-align: center;
+            vertical-align: middle;
+            border-radius: 3px;
+        }
+
+    }
+
+}
+
+.table-config {
+    .config-item {
+        padding: 5px 10px;
+    }
+
+    .config-sort {
+        .right {
+            float: right;
+        }
+    }
+}

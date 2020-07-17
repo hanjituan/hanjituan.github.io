@@ -1,0 +1,196 @@
+<div class="page-container edit-merchant">
+    <div class="content-container">
+        <form nz-form [formGroup]="merchantForm" (ngSubmit)="submitForm()">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="companyName">商户名称</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入商户名称">
+                    <input nz-input formControlName="companyName" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="businessLicenseNo">统一社会信用代码</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入统一社会信用代码">
+                    <input nz-input formControlName="businessLicenseNo" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="legalName">法人/负责人姓名</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入法人/负责人姓名">
+                    <input nz-input formControlName="legalName" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="idCardType">法人证件类型</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择法人证件类型">
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="请选择" formControlName="idCardType">
+                        <nz-option *ngFor="let option of cardTypeList" [nzValue]="option.value"
+                            [nzLabel]="option.label"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="idcardNo">法人证件号码</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入法人证件号码">
+                    <input nz-input formControlName="idcardNo" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="linkMan1">联系人</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入联系人">
+                    <input nz-input formControlName="linkMan1" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="linkManTel1">手机号</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入手机号">
+                    <input nz-input formControlName="linkManTel1" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="addressIds">商户地址</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入商户地址">
+                    <app-three-link kind="alone" formControlName="addressIds">
+                    </app-three-link>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-control [nzSm]="14" nzOffset="6" [nzXs]="24" nzErrorTip="请输入详细地址">
+                    <input nz-input formControlName="address" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item *ngIf="(!orgId && !isDetail) || isDetail">
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="moduleTemplateId">权限模板</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择权限模板">
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="请选择" formControlName="moduleTemplateId">
+                        <nz-option *ngFor="let option of tplList" [nzValue]="option.value" [nzLabel]="option.label">
+                        </nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item *ngIf="(!orgId && !isDetail) || isDetail">
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="companyAccountType">账号类型</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择账号类型">
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="请选择" formControlName="companyAccountType">
+                        <nz-option *ngFor="let option of merchantTypeList" [nzValue]="option.value"
+                            [nzLabel]="option.label"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item *ngIf="(!orgId && !isDetail) || isDetail">
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="userNumber">用户数</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入用户数">
+                    <nz-input-group [nzAddOnAfter]="addOnAfterTemplate">
+                        <input type="number" formControlName="userNumber" nz-input />
+                    </nz-input-group>
+                    <ng-template #addOnAfterTemplate>
+                        <label nz-checkbox formControlName="isLimitUserNumber">限制用户数（用户数不包含管理员）</label>
+                    </ng-template>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item *ngIf="(!orgId && !isDetail) || isDetail">
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="expireDate">到期时间</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择到期时间">
+                    <nz-date-picker formControlName="expireDate"></nz-date-picker>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="salesMan">销售人员</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <input nz-input formControlName="salesMan" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="salesManDeptCodeList">机构</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzErrorTip="请选择机构!">
+                    <app-org-cascader formControlName="salesManDeptCodeList"
+                        (optionNameChange)="deptNameChange($event)">
+                    </app-org-cascader>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <!-- <nz-form-label [nzSm]="6" [nzXs]="24"></nz-form-label> -->
+                <nz-form-control [nzSm]="14" [nzXs]="24 ">
+                    <div class="info">附加信息: 用来标记不同账户的同一主账户信息 </div>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="extend1">营业执照名称</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入营业执照名称">
+                    <input nz-input formControlName="extend1" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="extend2">营业执照编号</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入营业执照编号">
+                    <input nz-input formControlName="extend2" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="extend3">摊位号</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入摊位号">
+                    <input nz-input formControlName="extend3" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-control nzOffset="6">
+                    <button nz-button nzType="primary" *ngIf="!isDetail">保存</button>
+                    <button nz-button nzType="primary" type="button" *ngIf="isDetail" (click)="editInfo()">修改</button>
+                    <button nz-button nzType="primary" type="button" *ngIf="isDetail" (click)="changeInfo()">变更</button>
+                    <button nz-button nzType="primary" type="button" *ngIf="isDetail && merchantInfo.isLock"
+                        (click)="setOnOrOff()">上线</button>
+                    <button nz-button nzType="primary" type="button" *ngIf="isDetail && !merchantInfo.isLock"
+                        (click)="setOnOrOff(true)">下线</button>
+                    <button nz-button nzType="primary" type="button" *ngIf="isDetail" (click)="logout()">注销</button>
+                    <button nz-button type="button" (click)="goBack()">返回</button>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </div>
+</div>
+
+
+<ng-template #merchantChangeTpl>
+    <form nz-form [formGroup]="merchantChangeForm">
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="moduleTemplateId">权限模板</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择权限模板">
+                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="请选择" formControlName="moduleTemplateId">
+                    <nz-option *ngFor="let option of tplList" [nzValue]="option.value" [nzLabel]="option.label">
+                    </nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="companyAccountType">账号类型</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择账号类型">
+                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="请选择" formControlName="companyAccountType">
+                    <nz-option *ngFor="let option of merchantTypeList" [nzValue]="option.value"
+                        [nzLabel]="option.label"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="userNumber">子账户数</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入用户数">
+                <nz-input-group [nzAddOnAfter]="addOnAfterTemplate">
+                    <input type="number" formControlName="userNumber" nz-input />
+                </nz-input-group>
+                <ng-template #addOnAfterTemplate>
+                    <label nz-checkbox formControlName="isLimitUserNumber">限制用户数</label>
+                </ng-template>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="expireDate">到期时间</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请选择到期时间">
+                <nz-date-picker formControlName="expireDate"></nz-date-picker>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</ng-template>

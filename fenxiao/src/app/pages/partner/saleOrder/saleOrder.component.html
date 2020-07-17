@@ -1,0 +1,138 @@
+<div class="sale-wraper" *ngIf="currentPage===pageType.List">
+    <!-- <ng-container *ngIf="currentPage===pageType.List">
+        <div class="operate-bar" [ngClass]="{'extend-conditions': extendConditions}">
+            <div class="operate-item">
+                <span>单据类型: </span>
+                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="请选择" [(ngModel)]="filters.billType">
+                    <nz-option nzLabel="全部" nzValue=""></nz-option>
+                    <nz-option nzLabel="销售单" nzValue="1001"></nz-option>
+                    <nz-option nzLabel="销退单" nzValue="1002"></nz-option>
+                </nz-select>
+            </div>
+
+            <div class="operate-item">
+                <span>会员: </span>
+                <input type="text" nz-input placeholder="请输入会员名称/手机号" [(ngModel)]="filters.memberName" />
+            </div>
+
+            <div class="operate-item btn-groups">
+                <button nz-button (click)="getDataList()" nzType="primary">
+                    <i class="iconfont fxsousuo"></i> 搜索
+                </button>
+                <button nz-button (click)="resetCondition()">
+                    <i class="iconfont fxreset"></i> 重置
+                </button>
+                <nz-badge [nzCount]="0">
+                    <button nz-button nzType="default" (click)="extendConditions = !extendConditions">
+                        <i nz-icon nzType="down" nzTheme="outline"></i> 更多
+                    </button>
+                </nz-badge>
+            </div>
+
+            <div class="operate-item">
+                <span>收银员: </span>
+                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="请选择收银员" [(ngModel)]="filters.creatorId">
+                    <nz-option nzLabel="全部" nzValue=""></nz-option>
+                    <nz-option *ngFor="let item of personList" [nzLabel]="item.name" [nzValue]="item.userId">
+                    </nz-option>
+                </nz-select>
+            </div>
+
+            <div class="operate-item">
+                <span>单据编号: </span>
+                <input type="text" nz-input placeholder="请输入单据编号" [(ngModel)]="filters.billNo" />
+            </div>
+
+            <div class="operate-item btn-groups">
+                <span>单据状态: </span>
+                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="请选择单据状态" [(ngModel)]="filters.state">
+                    <nz-option nzLabel="全部" nzValue=""></nz-option>
+                    <nz-option nzLabel="已作废" nzValue="4"></nz-option>
+                    <nz-option nzLabel="已完成" nzValue="3"></nz-option>
+                </nz-select>
+            </div>
+            <div class="operate-item">
+                <span>创建时间: </span>
+                <nz-range-picker [nzFormat]="dateFormat" [(ngModel)]="timesRange" (ngModelChange)="changeTime()">
+                </nz-range-picker>
+            </div>
+        </div>
+
+        <div class="container">
+            <app-ufast-table-nav [tableConfig]="tableConfig" [rightTemplate]="rightNav">
+            </app-ufast-table-nav>
+
+            <ng-template #rightNav>
+                <nz-button-group>
+                    <button class="refresh" nz-button (click)="getDataList()">
+                        <i class="icon" nz-icon type="sync" theme="outline"></i>
+                    </button>
+                    <button style="margin: 0;border-radius:0" class="refresh" nz-button appDownload class="m-r-xs"
+                        [downloadUrl]="productExportParam.downloadUrl" [method]="productExportParam.reqMethod"
+                        [reqParam]="productExportParam.fileParam" [fileName]="productExportParam.fileName"
+                        [downloadServer]="productExportParam.downloadServer">
+                        <i nz-icon type="upload" theme="outline"></i>
+                    </button>
+                </nz-button-group>
+            </ng-template>
+
+            <app-ufast-table [tableConfig]=" tableConfig" (selectedChange)="checkTableItem($event)" [dataList]="dataList"
+                (updateList)="getDataList($event)" (selectedChange)="checkTableItem($event)" (sortChange)="listByOrder($event)">
+            </app-ufast-table>
+
+            <ng-template #seqNoTpl let-index="_index">
+                {{index + 1}}
+            </ng-template>
+
+            <ng-template #operationTpl let-item="_item">
+                <span style="color: #3399FF;cursor: pointer;" (click)="checkDetail(item)">{{item.billNo}}</span>
+            </ng-template>
+
+            <ng-template #stateTpl let-enabled="enabled" let-item="_item">
+                <nz-badge *ngIf="!enabled" nzStatus="success" nzText="已启用"></nz-badge>
+                <nz-badge *ngIf="enabled" nzStatus="error" nzText="已停用"></nz-badge>
+            </ng-template>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="currentPage===pageType.Add">
+        <app-sale-detail [itemObj]="itemObj" (returnBack)="returnToList($event)"></app-sale-detail>
+    </ng-container>
+    <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzFooter]="null" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+    </nz-modal> -->
+
+    <!-- adadsd -->
+    <button class="add-btn" nz-button (click)="goAdd()" nzType="primary">
+        <span><i nz-icon nzType="plus" nzTheme="outline"></i></span>
+        <span>新增市场</span>
+    </button>
+
+    <ul class="container">
+        <li *ngFor="let item of dataList">
+            <!--  [src]="item.logoUrl" -->
+            <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2172924345,2907579717&fm=26&gp=0.jpg" alt=""
+                class="merchant-banner">
+            <div class="merchant-baseinfo">
+                <div class="baseinfo-name">{{item.name}}</div>
+                <div class="baseinfo-people-time">
+                    <span>入住商户: <b>{{item.orgId}}</b></span>
+                    <span style="margin-left: 60px;">创建时间: <b>{{item.createDate | map:'date:yyyy-MM-dd HH:mm:ss'}}</b></span>
+                </div>
+            </div>
+            <div class="merchant-operate">
+                <button class="op-btn" nz-button (click)="getDataList()" nzType="primary">
+                    <span>编辑</span>
+                </button>
+                <button class="op-btn" nz-button (click)="getDataList()" nzType="primary">
+                    <span>下线</span>
+                </button>
+
+            </div>
+        </li>
+    </ul>
+
+</div>
+
+<div *ngIf="currentPage===pageType.Add">
+    <app-add (returnBack)="returnToList($event)"></app-add>
+</div>

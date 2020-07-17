@@ -1,0 +1,77 @@
+<div class="dept-wraper">
+    <div class="button-box">
+        <button class="btn-add" nz-button (click)="addDept()" nzType="primary">新增机构</button>
+
+    </div>
+    <ul class="category-wrap">
+        <li *ngFor="let item of firstData;index as i">
+            <div class="fi-list" [ngClass]="{'shadow': item.open}">
+                <span>
+                    <div class="folder-icon">
+                        <i (click)="closeFolder(i,'firstData')" *ngIf="item.open" nz-icon nzType="folder-open"
+                            [nzTheme]="item.leaf ? 'outline' : 'fill'"></i>
+                        <i (click)="openFolder(i,'firstData')" *ngIf="!item.open" nz-icon nzType="folder"
+                            [nzTheme]="item.leaf ? 'outline' : 'fill'"></i>
+                    </div>
+                    <div class="fi-name" (click)="openFolder(i,'firstData')" *ngIf="!item.state">{{item.name}}</div>
+                    <input *ngIf="item.state" nz-input [(ngModel)]="item.name" type="text" style="width:200px">
+                    <div *ngIf="item.state" class="add-item">
+                        <button nz-button nzType="primary" (click)="saveAdd(i,'firstData')">保存</button>
+                        <button nz-button (click)="cancelAdd(i,'firstData')">取消</button>
+                    </div>
+                </span>
+                <span>
+                    <button nz-button nzType="link" (click)="editCell(i,'firstData')">编辑</button>
+                    <button nz-button nzType="link" (click)="deleteCell(i,'firstData')">删除</button>
+                    <button nz-button nzType="link" (click)="addChild(i,'firstData')">添加下级机构</button>
+                </span>
+            </div>
+
+            <ng-container *ngFor="let el of secondData;let index = index">
+                <div class="sc-list" *ngIf="item.open" [ngClass]="{'light-shadow': el.open}">
+                    <span *ngIf="item.id === el.pId">
+                        <div class="folder-icon">
+                            <i (click)="closeFolder(index,'secondData')" *ngIf="el.open" nz-icon nzType="folder-open"
+                                [nzTheme]="el.leaf ? 'outline' : 'fill'">
+                            </i>
+                            <i (click)="openFolder(index,'secondData')" *ngIf="!el.open" nz-icon nzType="folder"
+                                [nzTheme]="el.leaf ? 'outline' : 'fill'">
+                            </i>
+                        </div>
+                        <div class="fi-name" style="font-weight: normal;" (click)="openFolder(index,'secondData')"
+                            *ngIf="!el.state">
+                            {{el.name}}</div>
+                        <input *ngIf="el.state" nz-input [(ngModel)]="el.name" type="text" style="width:200px">
+                        <div *ngIf="el.state" class="add-item">
+                            <button nz-button nzType="primary" (click)="saveAdd(index,'secondData')">保存</button>
+                            <button nz-button (click)="cancelAdd(index,'secondData')">取消</button>
+                        </div>
+                    </span>
+                    <span class="sc-opr" *ngIf="item.id === el.pId">
+                        <button nz-button nzType="link" (click)="editCell(index,'secondData')">编辑</button>
+                        <button nz-button nzType="link" (click)="deleteCell(index,'secondData')">删除</button>
+                        <button nz-button nzType="link" (click)="addChild(index,'secondData')">添加下级机构</button>
+                    </span>
+                </div>
+
+                <div class="th-list" *ngIf="item.open && el.open">
+                    <ng-container *ngFor="let thirdItem of thirdData;let index = index">
+                        <span *ngIf="item.id === el.pId && el.id === thirdItem.pId">
+                            <div *ngIf="!thirdItem.state">{{thirdItem.name}}</div>
+                            <input *ngIf="thirdItem.state" nz-input [(ngModel)]="thirdItem.name" type="text"
+                                style="width:200px">
+                            <div *ngIf="thirdItem.state" class="add-item">
+                                <button nz-button nzType="primary" (click)="saveAdd(index,'thirdData')">保存</button>
+                                <button nz-button (click)="cancelAdd(index,'thirdData')">取消</button>
+                            </div>
+                        </span>
+                        <span class="th-opr" *ngIf="item.id === el.pId && el.id === thirdItem.pId">
+                            <button nz-button nzType="link" (click)="editCell(index,'thirdData')">编辑</button>
+                            <button nz-button nzType="link" (click)="deleteCell(index,'thirdData')">删除</button>
+                        </span>
+                    </ng-container>
+                </div>
+            </ng-container>
+        </li>
+    </ul>
+</div>

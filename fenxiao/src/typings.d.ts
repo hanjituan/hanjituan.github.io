@@ -1,0 +1,1 @@
+declare var fxI18n: any;

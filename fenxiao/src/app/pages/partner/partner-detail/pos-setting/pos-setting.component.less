@@ -1,0 +1,95 @@
+.form-container {
+    width: 100%;
+    padding: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20 auto;
+    background-color: #ffffff;
+    padding: 20px;
+
+    .base-title {
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 5px;
+        font-weight: bold;
+        display: flex;
+        width: 100%;
+    }
+
+    .ant-form {
+        margin-top: 40px;
+        width: 100%;
+    }
+
+    .img-container {
+        padding-top: 100px;
+        width: 250px;
+    }
+
+    // 表单元素
+
+    /deep/.ant-form {
+        width: 1000px;
+    }
+
+    .ant-btn {
+        width: 84px;
+        height: 36px;
+        border-radius: 2px;
+    }
+
+    .ant-input {
+        // width: 380px;
+        height: 36px;
+        border-radius: 0;
+    }
+
+    .ant-input:focus {
+        outline: 0;
+        box-shadow: none;
+        border-color: rgba(250, 140, 22, 1);
+    }
+
+    .ant-input:hover {
+        border-color: rgba(250, 140, 22, 1);
+    }
+
+    .ant-cascader-picker-label:focus {
+        border-color: rgba(250, 140, 22, 1);
+    }
+
+    .ant-select {
+        // width: 380px;
+        height: 36px;
+        border-radius: 0;
+    }
+
+    .ant-cascader-picker {
+        // width: 380px;
+        height: 36px;
+        border-radius: 0;
+    }
+
+    /deep/.ant-cascader-input.ant-input {
+        height: 36px;
+        border-radius: 0;
+    }
+
+    .title {
+        // font-size: 30px;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .ant-form-item {
+        margin-top: 40px;
+    }
+
+    /deep/.ant-input-number {
+        border-radius: 0px;
+    }
+
+    .footer {
+        width: 100%;
+        text-align: center;
+    }
+}

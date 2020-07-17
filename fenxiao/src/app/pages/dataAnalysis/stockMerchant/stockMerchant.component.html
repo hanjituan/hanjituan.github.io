@@ -1,0 +1,109 @@
+<div class="tab-wraper">
+    <span [ngClass]="{'active-tab': activeTab === '1'}" (click)="switchTab('1')">按机构统计</span>
+    <span [ngClass]="{'active-tab': activeTab === '2'}" (click)="switchTab('2')">按员工统计</span>
+</div>
+
+<div class="inventory-detail">
+    <div class="operate-bar">
+        <div class="operate-item" *ngIf="activeTab === '1'">
+            <span>机构层级: </span>
+            <nz-select nzShowSearch nzPlaceHolder="请选择" [(ngModel)]="filters.dimension">
+                <nz-option nzLabel="总行" nzValue="1"></nz-option>
+                <nz-option nzLabel="支行" nzValue="2"></nz-option>
+                <nz-option nzLabel="网点" nzValue="3"></nz-option>
+            </nz-select>
+        </div>
+
+        <div class="operate-item">
+            <span>机构: </span>
+            <nz-cascader style="width: 300px;" [nzPlaceHolder]="'请选择'" nzChangeOnSelect [(ngModel)]="curOrgValue"
+                [nzLoadData]="loadData.bind(this)" (ngModelChange)="dataChange($event)"
+                (nzSelectionChange)="optionChange($event)">
+            </nz-cascader>
+        </div>
+
+        <div class="operate-item" *ngIf="activeTab === '2'">
+            <span>业务员: </span>
+            <input type="text" nz-input [(ngModel)]="filters.saleManSearchStr" placeholder="请输入业务员" />
+        </div>
+
+
+        <div class="operate-item btn-groups">
+            <button nz-button (click)="getTbData()" nzType="primary">
+                <i class="iconfont fxsousuo"></i> 搜索
+            </button>
+            <button nz-button (click)="resetCondition()">
+                <i class="iconfont fxreset"></i> 重置
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+        <app-ufast-table-nav [tableConfig]="tableConfig" [rightTemplate]="rightNav">
+        </app-ufast-table-nav>
+        <ng-template #rightNav>
+            <nz-button-group>
+                <button class="refresh" nz-button (click)="getDataList()">
+                    <i class="icon" nz-icon type="sync" theme="outline"></i>
+                </button>
+                <button class="refresh" style="margin: 0;border-left: none;" nz-button appDownload
+                    [downloadUrl]="productExportParam.downloadUrl" [method]="productExportParam.reqMethod"
+                    [reqParam]="productExportParam.fileParam" [fileName]="productExportParam.fileName"
+                    [downloadServer]="productExportParam.downloadServer">
+                    <i nz-icon type="upload" theme="outline"></i>
+                </button>
+            </nz-button-group>
+        </ng-template>
+        <nz-table class="list-table" #colSpanTable [nzData]="dataList" nzBordered="true"
+            (nzPageIndexChange)="getTbData()" nzSize="small" [nzFrontPagination]="false"
+            (nzPageSizeChange)="getTbData()" [nzTotal]="tbInfoObj.totalNum" nzShowSizeChanger
+            [(nzPageIndex)]="searchParams.pageNum" [(nzPageSize)]="searchParams.pageSize">
+            <thead>
+                <tr>
+                    <th class="text-center" *ngIf="activeTab === '2'" nzWidth="100px" rowspan="2">业务员工号</th>
+                    <th class="text-center" *ngIf="activeTab === '2'" nzWidth="100px" rowspan="2">业务员</th>
+                    <th class="text-center" *ngIf="activeTab === '2'" nzWidth="100px" rowspan="2">手机号</th>
+                    <th class="text-center" *ngIf="activeTab === '2'" nzWidth="100px" rowspan="2">所属机构</th>
+                    <th class="text-center" *ngIf="activeTab === '1'" nzWidth="180px" rowspan="2">机构</th>
+
+                    <th class="text-center" nzWidth="100px" colspan="2">商户总数</th>
+                    <th class="text-center" nzWidth="100px" colspan="2">正式商户</th>
+                    <th class="text-center" nzWidth="100px" colspan="2">适用商户</th>
+                    <th class="text-center" nzWidth="100px" colspan="2">停用商户</th>
+                    <th class="text-center" nzWidth="100px" rowspan="2">绑定扫码付</th>
+                    <th class="text-center" nzWidth="100px" rowspan="2">绑定Q付通</th>
+                </tr>
+                <tr>
+                    <th class="text-center">商户数</th>
+                    <th class="text-center">子账户数</th>
+                    <th class="text-center">商户数</th>
+                    <th class="text-center">子账户数</th>
+                    <th class="text-center">商户数</th>
+                    <th class="text-center">子账户数</th>
+                    <th class="text-center">商户数</th>
+                    <th class="text-center">子账户数</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of colSpanTable.data; index as i">
+                    <td *ngIf="activeTab === '2'">{{ data.saleManWorkNumber }}</td>
+                    <td *ngIf="activeTab === '2'">{{ data.saleManName }}</td>
+                    <td *ngIf="activeTab === '2'">{{ data.mobilePhone }}</td>
+                    <td *ngIf="activeTab === '2'">{{ data.organizationName }}</td>
+                    <td *ngIf="activeTab === '1'">{{ data.organizationName }}</td>
+
+                    <td>{{ data.totalCnts }}</td>
+                    <td>{{ data.totalUserCnts }}</td>
+                    <td>{{ data.formalCnts }}</td>
+                    <td>{{ data.formalUserCnts }}</td>
+                    <td>{{ data.trialCnts }}</td>
+                    <td>{{ data.trialUserCnts }}</td>
+                    <td>{{ data.unusedCnts }}</td>
+                    <td>{{ data.unusedUserCnts }}</td>
+                    <td>{{ data.tdbcMicroPayCnts }}</td>
+                    <td>{{ data.qftCnts }}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</div>

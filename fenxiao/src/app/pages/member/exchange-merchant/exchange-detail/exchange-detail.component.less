@@ -1,0 +1,59 @@
+.back {
+    background: #fff;
+    margin-bottom: 8px;
+}
+
+.operate-bar {
+    height: 60px;
+    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    transition: all ease 0.3s;
+    overflow: hidden;
+
+    nz-select {
+        width: 200px;
+        height: 36px;
+        border-radius: 2px;
+    }
+
+    /deep/.ant-cascader-input.ant-input {
+        height: 36px;
+        border-radius: 0;
+    }
+
+    .operate-item {
+        margin-left: 16px;
+        margin-top: 5px;
+        display: flex;
+        align-items: center;
+
+        span {
+            min-width: 90px;
+            text-align: right;
+            padding: 0 8px;
+        }
+    }
+
+    .btn-groups {
+        width: calc(100% - 950px);
+    }
+
+    /deep/.ant-select-selection__rendered {
+        line-height: 36px;
+    }
+}
+
+.container {
+    margin-top: 8px;
+    padding: 20px 18px 50px 16px;
+    background-color: #fff;
+}
+
+.refresh {
+    margin: 0 !important;
+    border-right: none;
+    background-color: #FAFAFA;
+    width: 40px;
+    height: 36px;
+}

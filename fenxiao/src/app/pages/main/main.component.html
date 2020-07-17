@@ -1,0 +1,37 @@
+<nz-layout class="fx-layout">
+    <nz-header class="fx-layout-header">
+        <div class="right-action-wrap">
+            <div class="login-wrap">
+                平台管理端
+            </div>
+            <div>
+                <nz-dropdown>
+                    <a nz-dropdown>
+                        <i class="nav-icon" nz-icon nzType="user" nzTheme="outline"></i>
+                        <span>{{userName}}</span>
+                    </a>
+                    <ul nz-menu>
+                        <li nz-menu-item (click)="modifyPwd()">修改密码</li>
+                    </ul>
+                </nz-dropdown>
+            </div>
+            <div class="exit-wrap" (click)="logOut()">
+                <i class="nav-icon" nz-icon nzType="logout" nzTheme="outline"></i>
+                <span>退出</span>
+            </div>
+        </div>
+    </nz-header>
+    <nz-layout class="fx-layout-content">
+        <nz-sider>
+            <app-side-menu></app-side-menu>
+        </nz-sider>
+        <nz-content>
+            <div class="main-layout-breadcrumb">
+                <app-breadcrumb></app-breadcrumb>
+            </div>
+            <div class="main-layout">
+                <router-outlet></router-outlet>
+            </div>
+        </nz-content>
+    </nz-layout>
+</nz-layout>
