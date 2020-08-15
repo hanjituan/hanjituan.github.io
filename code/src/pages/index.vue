@@ -110,7 +110,7 @@
                         icon: 'el-icon-money',
                         children: [
                             { name: '设备资产', key: 'equipmentAssets' },
-                            { name: '租户管理', key: '2-2' },
+                            { name: '租户管理', key: 'tentManage' },
                         ],
                     },
                     {

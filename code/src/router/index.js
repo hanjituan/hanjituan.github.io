@@ -41,6 +41,11 @@ export default new Router({
                     name: 'equipmentAssets',
                     component: resolve => (require(["@/pages/assetsManage/equipmentAssets.vue"], resolve)),
                 },
+                {
+                    path: '/tentManage',
+                    name: 'tentManage',
+                    component: resolve => (require(["@/pages/assetsManage/tentManage.vue"], resolve)),
+                },
 
             ]
         },
