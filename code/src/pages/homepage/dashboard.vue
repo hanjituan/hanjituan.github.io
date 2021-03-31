@@ -51,8 +51,6 @@
                         :value="item.value">
                     </el-option>
                 </el-select>
-                <!-- <span @click="submit">{{$t('message.submit')}}</span> -->
-                <!-- <h1>{{$t('message.hello')}}</h1> -->
                 <el-select class="b" ref="testSelect" v-model="value" placeholder="请选择">
                     <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                     </el-option>
@@ -233,9 +231,6 @@
             }
         },
         mounted() {
-            console.log(this.$i18n.locale);
-            console.log(this.lang);
-
             this.init();
         }
     }

@@ -1,7 +1,7 @@
 <template>
     <div class="wraper-index">
         <el-container style="height: 100%;">
-            <el-container style="height: 100%;overflow: hidden;">
+            <el-container style="height: 100%; overflow: hidden;background-color: #F1F2F7">
                 <el-header style="display: flex;justify-content: space-between;align-items: center; font-size: 12px">
                     <img class="logo-pic" src="../assets/logo.png" alt="">
                     <el-dropdown @command="handleCommand">
@@ -19,7 +19,7 @@
                     </el-dropdown>
                 </el-header>
 
-                <el-container style="height: 100%;background-color: #F1F2F7">
+                <el-container>
                     <el-aside class="left-menu" width="none">
                         <el-menu :default-active="currentRoute" class="el-menu-vertical-demo" :unique-opened="true"
                             @open="handleOpen" @close="handleClose" :collapse="isCollapse">
@@ -231,8 +231,8 @@
             },
 
             removeTab(targetName) {
-                // console.log(targetName)
-                // console.log(this.editableTabs)
+                console.log(targetName)
+                console.log(this.editableTabs)
 
                 if (this.editableTabs.length == 1) {
                     return false;
@@ -250,7 +250,7 @@
                     return item.name != targetName;
                 })
 
-                // console.log(this.editableTabs);
+                console.log(this.editableTabs);
 
 
                 this.editableTabs.map((item, index) => {
@@ -280,7 +280,7 @@
             },
 
             switchRoute(item) {
-                // console.log(this.editableTabs);
+                console.log(this.editableTabs);
                 this.editableTabsValue = item.key;
                 this.$router.push(item.key);
                 this.addTab(item.name, item.key);
@@ -299,10 +299,10 @@
                 this.message = payload;
             },
             handleOpen(key, keyPath) {
-                // console.log(key, keyPath);
+                console.log(key, keyPath);
             },
             handleClose(key, keyPath) {
-                // console.log(key, keyPath);
+                console.log(key, keyPath);
             },
             handleCommand(command) {
                 if (command == 'a') {
@@ -341,6 +341,7 @@
 
     .el-menu-vertical-demo:not(.el-menu--collapse) {
         width: 200px;
+        /* min-height: 400px; */
     }
 
     .el-header {
@@ -348,8 +349,9 @@
     }
 
     .bot {
-        margin-left: 20px;
-        margin-top: 20px;
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
     }
 
     .cant-choose {
@@ -369,7 +371,7 @@
         background-color: #fff;
         position: relative;
         overflow-x: auto;
-        height: calc(100% - 60px);
+        height: 100%;
     }
 
     .drawer-control {

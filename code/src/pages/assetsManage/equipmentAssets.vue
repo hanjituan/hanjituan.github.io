@@ -1,8 +1,7 @@
 <template>
     <div class="hello">
 
-        <div @click="save">save</div>
-
+        <!-- <el-button @click="save" type="primary">保存</el-button> -->
 
         <div>
             <div style="margin-top:10px;">
@@ -55,14 +54,13 @@
                                 </el-form-item>
                             </template>
                         </el-table-column>
-
-                        <el-table-column label="test" prop="test">
-
-                        </el-table-column>
-
                     </el-table>
                 </el-form>
             </div>
+        </div>
+
+        <div class="save-btn">
+            <el-button type="primary" @click="save">保存</el-button>
         </div>
 
         <template>
@@ -121,5 +119,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+    .save-btn {
+        position: fixed;
+        left: 50%;
+        bottom: 20px;
+    }
 </style>
